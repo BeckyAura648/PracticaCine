@@ -33,14 +33,14 @@ export default function App() {
           <h1>CineSpot</h1>
         </div>
         <div className="nav-icon">
-          <span className="icon-placeholder">⭐</span>
+          <i className="fa-solid fa-star icon-estrellita" aria-label="Favoritos"></i>
         </div>
       </header>
 
       <main className="main-container">
         <section className="search-section">
           <div className="search-bar">
-            <span className="search-icon">🔍</span>
+            <i className="fa-solid fa-magnifying-glass search-icon-font" aria-label="Buscar"></i>
             <input 
               type="text" 
               placeholder="Buscar películas o series..."
@@ -101,20 +101,32 @@ export default function App() {
         </section>
       </main>
 
-      <dialog ref={modalRef} className="modal-pelicula">
-        <div className="modal-contenido">
-          <button className="btn-cerrar" onClick={cerrarModal}>×</button>
-          {peliculaSeleccionada && (
-            <div className="modal-info">
-              <img src={peliculaSeleccionada.imagen} alt={peliculaSeleccionada.titulo} />
-              <h2>{peliculaSeleccionada.titulo}</h2>
-              <p><strong>Tipo:</strong> {peliculaSeleccionada.tipo === 'pelicula' ? 'Película' : 'Serie'}</p>
-              <p><strong>Género:</strong> {peliculaSeleccionada.genero}</p>
-              <p><strong>ID del sistema:</strong> #{peliculaSeleccionada.id}</p>
-            </div>
-          )}
+      <dialog ref={modalRef} className="modal-pelicula" onClick={(e) => {
+        if (e.target === modalRef.current) cerrarModal();
+        }}>
+        {peliculaSeleccionada && (
+        <div className="modal-contenedor-horizontal">
+        <div className="modal-imagen-container">
+        <img src={peliculaSeleccionada.imagen} alt={peliculaSeleccionada.titulo} />
         </div>
-      </dialog>
+      
+        <div className="modal-detalles">
+        <button className="btn-cerrar" onClick={cerrarModal}>×</button>
+        
+        <span className="modal-badge-tipo">
+          {peliculaSeleccionada.tipo === 'pelicula' ? 'Película' : 'Serie'}
+        </span>
+        
+        <h2>{peliculaSeleccionada.titulo}</h2>
+        
+        <div className="modal-info-grupo">
+          <p><strong>Género:</strong> {peliculaSeleccionada.genero}</p>
+          <p><strong>Sinopsis:</strong> {peliculaSeleccionada.sinopsis}</p>
+        </div>
+      </div>
+    </div>
+      )}
+</dialog>
     </div>
   );
 }

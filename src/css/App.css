@@ -203,3 +203,140 @@ body {
     color: var(--text-muted);
     font-weight: 600;
 }
+
+.icon-estrellita {
+    font-size: 1.2rem;
+    color: rgb(226, 156, 236); /* Color estrella estilizado acorde a la paleta */
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.icon-estrellita:hover {
+    transform: scale(1.15);
+}
+
+.search-icon-font {
+    margin-right: 12px;
+    font-size: 1rem;
+    color: var(--text-muted, #6B5B8A);
+}
+/* Estilos centrados y amplios para el Modal */
+.modal-pelicula {
+    background-color: var(--bg-surface, #F3E9FF);
+    border: 2px solid var(--lavender-mid, #A874E6);
+    border-radius: 20px;
+    padding: 0;
+    width: 90%;
+    max-width: 850px; /* Ancho ampliado para que luzca espacioso */
+    color: var(--text-dark, #2B1E42);
+    box-shadow: 0 20px 50px rgba(59, 42, 90, 0.3);
+    overflow: hidden;
+    animation: fadeInModal 0.25s ease-in-out;
+    
+    /* Propiedades clave para centrarlo exactamente en medio de la pantalla */
+    margin: auto;
+    position: fixed;
+    inset: 0;
+}
+
+/* Fondo oscuro translúcido con efecto difuminado (backdrop) */
+.modal-pelicula::backdrop {
+    background-color: rgba(43, 30, 66, 0.6);
+    backdrop-filter: blur(5px);
+}
+
+/* Contenedor en dos columnas (horizontal) */
+.modal-contenedor-horizontal {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-height: 450px; 
+}
+
+/* Columna Izquierda: Imagen más amplia */
+.modal-imagen-container {
+    flex: 0 0 42%;
+    background-color: var(--lavender-light, #D7B9FF);
+    overflow: hidden;
+}
+
+.modal-imagen-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Columna Derecha: Información */
+.modal-detalles {
+    flex: 1;
+    padding: 36px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    position: relative;
+}
+
+.modal-detalles h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--purple-dark, #3B2A5A);
+    margin-bottom: 14px;
+    line-height: 1.2;
+}
+
+.modal-badge-tipo {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    background-color: var(--purple-dark, #3B2A5A);
+    color: #FFFFFF;
+    padding: 5px 12px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    width: fit-content;
+}
+
+.modal-info-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 1rem;
+    color: var(--text-muted, #6B5B8A);
+    line-height: 1.5;
+}
+
+.modal-info-grupo p strong {
+    color: var(--purple-dark, #3B2A5A);
+}
+
+/* Botón de cierre chachipirulirequeteguay */
+.btn-cerrar {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--purple-dark, #3B2A5A);
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s ease;
+}
+
+.btn-cerrar:hover {
+    color: var(--lavender-mid, #A874E6);
+}
+
+@keyframes fadeInModal {
+    from {
+        opacity: 0;
+        transform: scale(0.93);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
