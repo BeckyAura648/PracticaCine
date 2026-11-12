@@ -206,7 +206,7 @@ body {
 
 .icon-estrellita {
     font-size: 1.2rem;
-    color: rgb(226, 156, 236); /* Color estrella estilizado acorde a la paleta */
+    color: #e29cec; 
     cursor: pointer;
     transition: transform 0.2s ease;
 }
