@@ -18,7 +18,7 @@ Filtros Combinados:
 
 - Sistema de Favoritos: Permite marcar o desmarcar títulos favoritos utilizando un icono de estrella interactivo. Cuenta con un panel deslizante superior con contador en tiempo real y la opción de eliminar elementos.
 
-- Interfaz Limpia sin Emojis: Iconografía profesional integrada mediante FontAwesome para mantener un diseño estético y pulido.
+- Interfaz Limpia: Iconografía profesional integrada mediante FontAwesome para mantener un diseño estético y pulido.
 
 # Tecnologías Utilizadas
 
