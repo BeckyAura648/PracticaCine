@@ -4,6 +4,9 @@ import '../css/App.css';
 
 export default function App() {
   const [filtroTipo, setFiltroTipo] = useState('todas');
+  const [filtroGenero, setFiltroGenero] = useState('todos');
+  const [mostrarMenuGeneros, setMostrarMenuGeneros] = useState(false);
+
   const [textoBusqueda, setTextoBusqueda] = useState('');
   const [peliculaSeleccionada, setPeliculaSeleccionada] = useState(null);
   const [favoritos, setFavoritos] = useState([]);
@@ -11,12 +14,15 @@ export default function App() {
 
   const modalRef = useRef(null);
 
+  const generosDisponibles = ['Todos', 'Ciencia ficción', 'Animación', 'Drama', 'Acción'];
+
   const catalogoFiltrado = catalogoCine.filter(item => {
     const coincideTipo = filtroTipo === 'todas' || item.tipo === filtroTipo;
+    const coincideGenero = filtroGenero === 'todos' || item.genero.toLowerCase() === filtroGenero.toLowerCase();
     const coincideBusqueda = 
       item.titulo.toLowerCase().includes(textoBusqueda.toLowerCase()) || 
       item.genero.toLowerCase().includes(textoBusqueda.toLowerCase());
-    return coincideTipo && coincideBusqueda;
+    return coincideTipo &&  coincideGenero && coincideBusqueda;
   });
 
   const abrirModal = (item) => {
@@ -35,6 +41,11 @@ export default function App() {
     } else {
       setFavoritos([...favoritos, idItem]);
     }
+  };
+
+  const seleccionarGenero = (genero) => {
+    setFiltroGenero(genero === 'Todos' ? 'todos' : genero);
+    setMostrarMenuGeneros(false);
   };
 
   const listaFavoritos = catalogoCine.filter(item => favoritos.includes(item.id));
@@ -104,10 +115,8 @@ export default function App() {
       )}
 
       <main className="main-container">
-        <section className="search-section">
-        </section>
-
-        <section className="filters-section">
+      {/* Una sola barra horizontal limpia y estilizada */}
+      <section className="filters-section">
           <button 
             className={`filter-btn ${filtroTipo === 'todas' ? 'active' : ''}`}
             onClick={() => setFiltroTipo('todas')}
@@ -126,6 +135,42 @@ export default function App() {
           >
             Series
           </button>
+          <div className="filter-divider"></div>
+
+          {/* Botón único desplegable para Géneros */}
+          <div className="genre-dropdown-wrapper">
+            <button 
+              className={`filter-btn genre-trigger ${filtroGenero !== 'todos' ? 'active' : ''}`}
+              onClick={() => setMostrarMenuGeneros(!mostrarMenuGeneros)}
+            >
+              <i className="fa-solid fa-filter" style={{ marginRight: '8px', fontSize: '0.85rem' }}></i>
+              {filtroGenero === 'todos' ? 'Géneros' : filtroGenero}
+              <i 
+                className={`fa-solid fa-chevron-${mostrarMenuGeneros ? 'up' : 'down'}`} 
+                style={{ marginLeft: '10px', fontSize: '0.8rem' }}
+              ></i>
+            </button>
+
+            {mostrarMenuGeneros && (
+              <div className="genre-dropdown-menu">
+                {generosDisponibles.map((genero) => {
+                  const esSeleccionado = 
+                    (genero === 'Todos' && filtroGenero === 'todos') || 
+                    genero.toLowerCase() === filtroGenero.toLowerCase();
+                  return (
+                    <button
+                      key={genero}
+                      className={`genre-option ${esSeleccionado ? 'selected' : ''}`}
+                      onClick={() => seleccionarGenero(genero)}
+                    >
+                      <span>{genero}</span>
+                      {esSeleccionado && <i className="fa-solid fa-check"></i>}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
         </section>
 
         <section className="catalog-grid">
@@ -173,7 +218,6 @@ export default function App() {
                   {peliculaSeleccionada.tipo === 'pelicula' ? 'Película' : 'Serie'}
                 </span>
                 
-                {/* Estrella y botón de cerrar juntos arriba a la derecha */}
                 <div className="modal-acciones-derecha">
                   <button 
                     className={`btn-modal-estrella ${esFavoritoActual ? 'activo' : ''}`}
@@ -192,6 +236,10 @@ export default function App() {
               
               <div className="modal-info-grupo">
                 <p><strong>Género:</strong> {peliculaSeleccionada.genero}</p>
+                <p><strong>Año:</strong> {peliculaSeleccionada.anio}</p>
+                <p>
+                    <strong>{peliculaSeleccionada.tipo === 'pelicula' ? 'Duración:' : 'Temporadas:'}</strong> {peliculaSeleccionada.duracion}
+                </p>
                 <p><strong>Sinopsis:</strong> {peliculaSeleccionada.sinopsis}</p>
               </div>
             </div>

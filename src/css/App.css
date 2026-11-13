@@ -112,6 +112,27 @@ body {
 }
 
 /* Botones de Filtro */
+/* Contenedor general de filtros */
+.filters-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filter-label {
+    font-weight: 700;
+    color: var(--purple-dark);
+    font-size: 0.95rem;
+    margin-right: 4px;
+}
 .filters-section {
     display: flex;
     gap: 12px;
@@ -549,4 +570,77 @@ body {
     opacity: 1;
     color: #ff7b89; /* Tono coral pastel al hacer hover */
     transform: scale(1.1);
+}
+
+/* Barra única de filtros */
+.filters-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+}
+
+.filter-divider {
+    width: 2px;
+    height: 24px;
+    background-color: var(--lavender-mid);
+    opacity: 0.4;
+    margin: 0 4px;
+}
+
+/* Contenedor del botón desplegable de géneros */
+.genre-dropdown-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.genre-trigger {
+    display: flex;
+    align-items: center;
+}
+
+/* Menú flotante de opciones de género */
+.genre-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    min-width: 200px;
+    background-color: var(--purple-dark);
+    border: 2px solid var(--lavender-mid);
+    border-radius: 14px;
+    padding: 8px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+    z-index: 500;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    animation: fadeInModal 0.18s ease-out;
+}
+
+.genre-option {
+    background: transparent;
+    border: none;
+    color: #FFFFFF;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 600;
+    padding: 9px 14px;
+    border-radius: 9px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+.genre-option:hover {
+    background-color: rgba(215, 185, 255, 0.18);
+    color: var(--lavender-light);
+}
+
+.genre-option.selected {
+    background-color: var(--lavender-mid);
+    color: #FFFFFF;
 }
