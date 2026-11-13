@@ -53,39 +53,62 @@ body {
 }
 
 /* Barra de Búsqueda */
-.search-section {
-    margin-bottom: 24px;
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--purple-dark);
+    padding: 16px 40px;
+    border-bottom: 2px solid var(--lavender-mid);
 }
 
-.search-bar {
+.nav-left-group {
     display: flex;
     align-items: center;
-    background-color: var(--bg-surface);
-    border: 2px solid var(--lavender-light);
-    border-radius: 14px;
-    padding: 12px 20px;
-    max-width: 600px;
-    box-shadow: 0 4px 12px rgba(59, 42, 90, 0.05);
+    gap: 40px; /* Espacio elegante entre CineSpot y la barra de búsqueda */
+    flex: 1;
 }
 
-.search-icon {
+.nav-brand h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+/* Buscador más largo y alineado hacia la izquierda */
+.nav-search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #2B1E42;
+    border: 2px solid var(--lavender-mid);
+    border-radius: 12px;
+    padding: 10px 20px;
+    width: 100%;
+    max-width: 550px; /* Barra más larga */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.search-icon-font {
     margin-right: 12px;
-    font-size: 1rem;
-    color: var(--text-muted);
+    font-size: 0.95rem;
+    color: var(--lavender-light);
 }
 
-.search-bar input {
+.nav-search-bar input {
     background: transparent;
     border: none;
     outline: none;
-    color: var(--text-dark);
-    font-size: 1rem;
+    color: #FFFFFF;
+    font-size: 0.95rem;
     font-family: 'Quicksand', sans-serif;
     width: 100%;
 }
 
-.search-bar input::placeholder {
-    color: var(--text-muted);
+.nav-search-bar input::placeholder {
+    color: var(--lavender-light);
+    opacity: 0.7;
 }
 
 /* Botones de Filtro */
@@ -220,43 +243,39 @@ body {
     font-size: 1rem;
     color: var(--text-muted, #6B5B8A);
 }
-/* Estilos centrados y amplios para el Modal */
+
 .modal-pelicula {
-    background-color: var(--bg-surface, #F3E9FF);
-    border: 2px solid var(--lavender-mid, #A874E6);
+    background-color: var(--purple-dark);
+    border: 2px solid var(--lavender-mid);
     border-radius: 20px;
     padding: 0;
     width: 90%;
-    max-width: 850px; /* Ancho ampliado para que luzca espacioso */
-    color: var(--text-dark, #2B1E42);
-    box-shadow: 0 20px 50px rgba(59, 42, 90, 0.3);
+    max-width: 850px;
+    color: #D1C4E9;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
     overflow: hidden;
     animation: fadeInModal 0.25s ease-in-out;
-    
-    /* Propiedades clave para centrarlo exactamente en medio de la pantalla */
     margin: auto;
     position: fixed;
     inset: 0;
 }
 
-/* Fondo oscuro translúcido con efecto difuminado (backdrop) */
 .modal-pelicula::backdrop {
-    background-color: rgba(43, 30, 66, 0.6);
+    background-color: rgba(43, 30, 66, 0.65);
     backdrop-filter: blur(5px);
 }
 
-/* Contenedor en dos columnas (horizontal) */
 .modal-contenedor-horizontal {
     display: flex;
     flex-direction: row;
     width: 100%;
-    min-height: 450px; 
+    min-height: 450px;
+    position: relative; 
 }
 
-/* Columna Izquierda: Imagen más amplia */
 .modal-imagen-container {
     flex: 0 0 42%;
-    background-color: var(--lavender-light, #D7B9FF);
+    background-color: var(--lavender-light);
     overflow: hidden;
 }
 
@@ -267,67 +286,83 @@ body {
     display: block;
 }
 
-/* Columna Derecha: Información */
 .modal-detalles {
     flex: 1;
     padding: 36px 40px;
     display: flex;
     flex-direction: column;
-    justify-content: center; 
-    position: relative;
+    justify-content: flex-start;
+    gap: 16px;
 }
 
-.modal-detalles h2 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--purple-dark, #3B2A5A);
-    margin-bottom: 14px;
-    line-height: 1.2;
-}
+/* Botón de cierre posicionado de forma absoluta en la esquina superior derecha del panel */
 
-.modal-badge-tipo {
-    display: inline-block;
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    background-color: var(--purple-dark, #3B2A5A);
-    color: #FFFFFF;
-    padding: 5px 12px;
-    border-radius: 6px;
-    margin-bottom: 12px;
-    width: fit-content;
-}
-
-.modal-info-grupo {
+.modal-top-row {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-    font-size: 1rem;
-    color: var(--text-muted, #6B5B8A);
-    line-height: 1.5;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
-.modal-info-grupo p strong {
-    color: var(--purple-dark, #3B2A5A);
+.modal-acciones-derecha {
+    display: flex;
+    align-items: center;
+    gap: 12px; 
 }
 
-/* Botón de cierre chachipirulirequeteguay */
 .btn-cerrar {
-    position: absolute;
-    top: 20px;
-    right: 24px;
     background: transparent;
     border: none;
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 700;
-    color: var(--purple-dark, #3B2A5A);
+    color: var(--lavender-light);
     cursor: pointer;
     line-height: 1;
     transition: color 0.2s ease;
 }
 
 .btn-cerrar:hover {
-    color: var(--lavender-mid, #A874E6);
+    color: #FFFFFF;
+}
+
+/* Contenido superior ordenado hacia arriba */
+.modal-header-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+.modal-badge-tipo {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    background-color: rgba(168, 116, 230, 0.35);
+    color: var(--lavender-light);
+    padding: 5px 12px;
+    border-radius: 6px;
+    width: fit-content; /* Evita que ocupe todo el ancho */
+}
+
+.modal-header-content h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--lavender-light);
+    line-height: 1.2;
+    margin: 0;
+}
+
+.modal-info-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 0.95rem;
+    color: rgb(169, 156, 193);
+    line-height: 1.5;
+}
+
+.modal-info-grupo p strong {
+    color: #D1C4E9;
 }
 
 @keyframes fadeInModal {
@@ -339,4 +374,179 @@ body {
         opacity: 1;
         transform: scale(1);
     }
+}
+
+/* Controles superiores derechos en el modal */
+.modal-acciones-derecha {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Botón de estrella dentro del modal */
+.btn-modal-estrella {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid var(--lavender-mid);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--lavender-light);
+    font-size: 0.95rem;
+}
+
+.btn-modal-estrella:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.08);
+}
+
+.btn-modal-estrella.activo {
+    background-color: #A874E6;
+    border-color: #A874E6;
+    color: var(--purple-dark);
+}
+
+/* Estrella en la barra de navegación */
+.icon-estrellita {
+    font-size: 1.3rem;
+    color: var(--lavender-light);
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.icon-estrellita.activo {
+    color: #A874E6;
+}
+
+.icon-estrellita:hover {
+    transform: scale(1.15);
+}
+
+/* Contador de favoritos en el navbar */
+.badge-contador {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background-color: rgb(128, 76, 190);
+    color: var(--purple-dark);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
+
+/* Panel Desplegable de Favoritos (Con Scroll) */
+.dropdown-favoritos {
+    position: absolute;
+    top: 70px;
+    right: 32px;
+    width: 380px;
+    max-height: 480px;
+    background-color: var(--purple-dark);
+    border: 2px solid var(--lavender-mid);
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: fadeInModal 0.2s ease-in-out;
+}
+
+.dropdown-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.dropdown-header h3 {
+    font-size: 1.1rem;
+    color: #FFFFFF;
+}
+
+.btn-cerrar-dropdown {
+    background: transparent;
+    border: none;
+    color: var(--lavender-light);
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.dropdown-body {
+    padding: 12px;
+    overflow-y: auto; 
+    max-height: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.vacio-texto {
+    color: #D1C4E9;
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 24px;
+}
+
+/* Elemento individual dentro de la lista de favoritos */
+.fav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 8px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.fav-item:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.fav-item img {
+    width: 45px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.fav-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.fav-info h4 {
+    font-size: 0.95rem;
+    color: #FFFFFF;
+}
+
+.fav-info span {
+    font-size: 0.8rem;
+    color: var(--lavender-light);
+}
+
+.btn-quitar-fav {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--lavender-light);
+    opacity: 0.75;
+    padding: 6px;
+    transition: opacity 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-quitar-fav:hover {
+    opacity: 1;
+    color: #ff7b89; /* Tono coral pastel al hacer hover */
+    transform: scale(1.1);
 }

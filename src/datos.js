@@ -158,5 +158,13 @@ export const catalogoCine = [
     tipo: 'serie',
     imagen: 'public/24.jpg',
     sinopsis: 'El agente antiterrorista Jack Bauer corre contra el reloj en tiempo real para detener complots letales y salvar a su nación del desastre inminente.'
+  },
+  {
+    id: 21,
+    titulo: 'Terror Bajo La Tierra',
+    genero: 'Acción',
+    tipo: 'pelicula',
+    imagen: 'public/Terrorbajolatierra.jpg',
+    sinopsis: 'Los habitantes de un pueblo aislado se defienden contra unas criaturas subterráneas que intentan matarlos uno por uno.'
   }
 ];

@@ -6,6 +6,9 @@ export default function App() {
   const [filtroTipo, setFiltroTipo] = useState('todas');
   const [textoBusqueda, setTextoBusqueda] = useState('');
   const [peliculaSeleccionada, setPeliculaSeleccionada] = useState(null);
+  const [favoritos, setFavoritos] = useState([]);
+  const [mostrarFavoritos, setMostrarFavoritos] = useState(false);
+
   const modalRef = useRef(null);
 
   const catalogoFiltrado = catalogoCine.filter(item => {
@@ -26,20 +29,27 @@ export default function App() {
     setPeliculaSeleccionada(null);
   };
 
+  const toggleFavorito = (idItem) => {
+    if (favoritos.includes(idItem)) {
+      setFavoritos(favoritos.filter(id => id !== idItem));
+    } else {
+      setFavoritos([...favoritos, idItem]);
+    }
+  };
+
+  const listaFavoritos = catalogoCine.filter(item => favoritos.includes(item.id));
+
+  const esFavoritoActual = peliculaSeleccionada ? favoritos.includes(peliculaSeleccionada.id) : false;
+
   return (
     <div>
       <header className="navbar">
-        <div className="nav-brand">
-          <h1>CineSpot</h1>
-        </div>
-        <div className="nav-icon">
-          <i className="fa-solid fa-star icon-estrellita" aria-label="Favoritos"></i>
-        </div>
-      </header>
+        <div className="nav-left-group">
+          <div className="nav-brand">
+            <h1>CineSpot</h1>
+          </div>
 
-      <main className="main-container">
-        <section className="search-section">
-          <div className="search-bar">
+          <div className="nav-search-bar">
             <i className="fa-solid fa-magnifying-glass search-icon-font" aria-label="Buscar"></i>
             <input 
               type="text" 
@@ -48,6 +58,53 @@ export default function App() {
               onChange={(e) => setTextoBusqueda(e.target.value)}
             />
           </div>
+        </div>
+
+        {/* Botón de la estrella principal para abrir el desplegable de favoritos */}
+        <div className="nav-icon" onClick={() => setMostrarFavoritos(!mostrarFavoritos)} style={{ position: 'relative', cursor: 'pointer' }}>
+          <i className={`fa-solid fa-star icon-estrellita ${favoritos.length > 0 ? 'activo' : ''}`} aria-label="Favoritos"></i>
+          {favoritos.length > 0 && <span className="badge-contador">{favoritos.length}</span>}
+        </div>
+      </header>
+
+      {mostrarFavoritos && (
+        <div className="dropdown-favoritos">
+          <div className="dropdown-header">
+          <h3>
+              <i className="fa-solid fa-star" style={{ color: '#D7B9FF', marginRight: '8px' }}></i>
+              Mis Favoritos
+            </h3>
+            <button className="btn-cerrar-dropdown" onClick={() => setMostrarFavoritos(false)}>
+              <i className="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+          <div className="dropdown-body">
+            {listaFavoritos.length === 0 ? (
+              <p className="vacio-texto">No hay películas o series marcadas como favoritas todavía.</p>
+            ) : (
+              listaFavoritos.map(fav => (
+                <div key={fav.id} className="fav-item" onClick={() => { abrirModal(fav); setMostrarFavoritos(false); }}>
+                  <img src={fav.imagen} alt={fav.titulo} />
+                  <div className="fav-info">
+                    <h4>{fav.titulo}</h4>
+                    <span>{fav.genero}</span>
+                  </div>
+                  <button 
+                    className="btn-quitar-fav" 
+                    onClick={(e) => { e.stopPropagation(); toggleFavorito(fav.id); }}
+                    title="Eliminar de favoritos"
+                  >
+                    <i className="fa-solid fa-trash-can"></i>
+                  </button>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+      )}
+
+      <main className="main-container">
+        <section className="search-section">
         </section>
 
         <section className="filters-section">
@@ -103,30 +160,44 @@ export default function App() {
 
       <dialog ref={modalRef} className="modal-pelicula" onClick={(e) => {
         if (e.target === modalRef.current) cerrarModal();
-        }}>
+      }}>
         {peliculaSeleccionada && (
-        <div className="modal-contenedor-horizontal">
-        <div className="modal-imagen-container">
-        <img src={peliculaSeleccionada.imagen} alt={peliculaSeleccionada.titulo} />
-        </div>
-      
-        <div className="modal-detalles">
-        <button className="btn-cerrar" onClick={cerrarModal}>×</button>
-        
-        <span className="modal-badge-tipo">
-          {peliculaSeleccionada.tipo === 'pelicula' ? 'Película' : 'Serie'}
-        </span>
-        
-        <h2>{peliculaSeleccionada.titulo}</h2>
-        
-        <div className="modal-info-grupo">
-          <p><strong>Género:</strong> {peliculaSeleccionada.genero}</p>
-          <p><strong>Sinopsis:</strong> {peliculaSeleccionada.sinopsis}</p>
-        </div>
-      </div>
-    </div>
-      )}
-</dialog>
+          <div className="modal-contenedor-horizontal">
+            <div className="modal-imagen-container">
+              <img src={peliculaSeleccionada.imagen} alt={peliculaSeleccionada.titulo} />
+            </div>
+            
+            <div className="modal-detalles">
+              <div className="modal-top-row">
+                <span className="modal-badge-tipo">
+                  {peliculaSeleccionada.tipo === 'pelicula' ? 'Película' : 'Serie'}
+                </span>
+                
+                {/* Estrella y botón de cerrar juntos arriba a la derecha */}
+                <div className="modal-acciones-derecha">
+                  <button 
+                    className={`btn-modal-estrella ${esFavoritoActual ? 'activo' : ''}`}
+                    onClick={() => toggleFavorito(peliculaSeleccionada.id)}
+                    title={esFavoritoActual ? "Quitar de favoritos" : "Agregar a favoritos"}
+                  >
+                    <i className="fa-solid fa-star"></i>
+                  </button>
+                  <button className="btn-cerrar" onClick={cerrarModal}>×</button>
+                </div>
+              </div>
+              
+              <div className="modal-header-content">
+                <h2>{peliculaSeleccionada.titulo}</h2>
+              </div>
+              
+              <div className="modal-info-grupo">
+                <p><strong>Género:</strong> {peliculaSeleccionada.genero}</p>
+                <p><strong>Sinopsis:</strong> {peliculaSeleccionada.sinopsis}</p>
+              </div>
+            </div>
+          </div>
+        )}
+      </dialog>
     </div>
   );
 }
