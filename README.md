@@ -4,31 +4,31 @@ CineSpot es una aplicación web interactiva desarrollada con React y Vite que fu
 
 # Características Principales
 
-Catálogo Completo (21 Títulos): Un arreglo estructurado de películas y series que incluye metadatos detallados (título, género, tipo, año de estreno, duración o temporadas y sinopsis).
+- Catálogo Completo (21 Títulos): Un arreglo estructurado de películas y series que incluye metadatos detallados (título, género, tipo, año de estreno, duración o temporadas y sinopsis).
 
-Buscador Inteligente: Barra de búsqueda en tiempo real que filtra de manera instantánea el catálogo según el texto ingresado.
+- Buscador Inteligente: Barra de búsqueda en tiempo real que filtra de manera instantánea el catálogo según el texto ingresado.
 
 Filtros Combinados:
 
-Botones rápidos de filtrado por tipo (Todas, Películas, Series).
+- Botones rápidos de filtrado por tipo (Todas, Películas, Series).
 
-Menú desplegable flotante e interactivo para filtrar por género (Ciencia Ficción, Animación, Drama, Acción).
+- Menú desplegable flotante e interactivo para filtrar por género (Ciencia Ficción, Animación, Drama, Acción).
 
-Modal de Detalles: Al hacer clic en cualquier tarjeta del catálogo, se abre una ventana flotante (modal) que muestra la información detallada, el año y la duración/temporadas correspondientes.
+- Modal de Detalles: Al hacer clic en cualquier tarjeta del catálogo, se abre una ventana flotante (modal) que muestra la información detallada, el año y la duración/temporadas correspondientes.
 
-Sistema de Favoritos: Permite marcar o desmarcar títulos favoritos utilizando un icono de estrella interactivo. Cuenta con un panel deslizante superior con contador en tiempo real y la opción de eliminar elementos.
+- Sistema de Favoritos: Permite marcar o desmarcar títulos favoritos utilizando un icono de estrella interactivo. Cuenta con un panel deslizante superior con contador en tiempo real y la opción de eliminar elementos.
 
-Interfaz Limpia sin Emojis: Iconografía profesional integrada mediante FontAwesome para mantener un diseño estético y pulido.
+- Interfaz Limpia sin Emojis: Iconografía profesional integrada mediante FontAwesome para mantener un diseño estético y pulido.
 
 # Tecnologías Utilizadas
 
-React (con Vite para un desarrollo y compilación ultrarrápidos)
+- React (con Vite para un desarrollo y compilación ultrarrápidos)
 
-CSS Moderno (Variables CSS, Flexbox/Grid y animaciones fluidas)
+- CSS Moderno (Variables CSS, Flexbox/Grid y animaciones fluidas)
 
-FontAwesome (Iconografía profesional)
+- FontAwesome (Iconografía profesional)
 
-Google Fonts - Quicksand (Tipografía principal)
+- Google Fonts - Quicksand (Tipografía principal)
 
 # Instalación y Ejecución
 
