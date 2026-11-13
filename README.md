@@ -2,7 +2,7 @@
 
 CineSpot es una aplicación web interactiva desarrollada con React y Vite que funciona como un catálogo digital moderno para explorar películas y series. Diseñada bajo una elegante estética "Lavender Milk", ofrece una experiencia visual minimalista, fluida y completamente optimizada para computadoras de escritorio.
 
-#Características Principales
+# Características Principales
 
 Catálogo Completo (21 Títulos): Un arreglo estructurado de películas y series que incluye metadatos detallados (título, género, tipo, año de estreno, duración o temporadas y sinopsis).
 
@@ -38,12 +38,10 @@ Clona el repositorio o descarga los archivos fuente.
 
 Abre la terminal en la carpeta raíz del proyecto e instala las dependencias:
 
-npm install
-
+> npm install
 
 Inicia el servidor de desarrollo:
 
-npm run dev
-
+> npm run dev
 
 Abre el enlace local proporcionado por Vite en tu navegador (por lo general http://localhost:5173).
